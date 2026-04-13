@@ -1,0 +1,14 @@
+/bin/
+# 1. Derlenmiş Çıktılar (Kesinlikle yoksayılmalı)
+*.class
+bin/
+dist/
+
+# 2. İşletim Sistemi Kalıntıları
+.DS_Store
+Thumbs.db
+
+# 3. Eclipse Ayar Dosyaları (Opsiyonel ama tavsiye edilir)
+.settings/
+#.project
+#.classpath
