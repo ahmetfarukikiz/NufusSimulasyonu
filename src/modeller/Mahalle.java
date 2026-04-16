@@ -17,7 +17,19 @@ import java.util.List;
 import servisler.FakeDataServis;
 
 public class Mahalle extends Yerleske {
-    private List<Kisi> kisiler;
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(35);
+		return sb.append("Mahalle: ").append(ad).append("-").append("Nüfus: ").append(nufus).toString();
+	}
+	
+	
+    public List<Kisi> getKisiler() {
+		return kisiler;
+	}
+    
+	private List<Kisi> kisiler;
 
     public Mahalle(int nufus) {
     	super(FakeDataServis.getMahalleAd(),nufus);
@@ -25,12 +37,26 @@ public class Mahalle extends Yerleske {
     }
     
     public void kisiEkle(Kisi kisi) {
-		if(kisi == null || kisiler.contains(kisi)) return;
+		if(kisi == null) return;
 		kisiler.add(kisi);
 	}
 	
 	public void kisiSil(Kisi kisi) {
-		if(kisi == null || (!kisiler.contains(kisi))) return;
+		if(kisi == null) return;
 		kisiler.remove(kisi);
+	}
+	
+	public void yaslandir() {
+		for(Kisi kisi : kisiler) {
+			kisi.yaslandir();
+		}
+	}
+
+	public void ekranaYazdir() {
+		System.out.println(this.toString());
+		System.out.println("Kişiler:");
+		for(Kisi kisi : kisiler) {
+			kisi.ekranaYazdir();
+		}		
 	}
 }

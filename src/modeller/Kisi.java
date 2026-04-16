@@ -14,6 +14,12 @@ import servisler.FakeDataServis;
 
 public class Kisi {
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(35);
+		return sb.append("\t").append(id).append("-").append(ad).append(soyad).append("-").append(yas).toString();
+	}
+
 	public String getAd() {
 		return ad;
 	}
@@ -40,5 +46,13 @@ public class Kisi {
 		soyad = FakeDataServis.getKisiSoyad();
 		id = RastgeleSayi.getNextId(); //rastgele id üretir ()
 		yas = RastgeleSayi.getNextYas();
+	}
+	
+	public void yaslandir() {
+		yas++;
+	}
+
+	public void ekranaYazdir() {
+		System.out.println(this.toString());
 	}
 }

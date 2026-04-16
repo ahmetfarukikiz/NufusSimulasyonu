@@ -13,10 +13,11 @@ import java.util.List;
 
 import modeller.Sehir;
 
-public final class YazdirServis {
+public final class YazdirServis implements IYazdirici {
 
 	// her tur sonu şehirlerin nüfusunu ekrana [xx]-[xx] formatında basar
-	public static void TurYazdir(List<Sehir> sehirler) {
+	@Override
+	public void TurYazdir(List<Sehir> sehirler) {
 
 		int kapasite = sehirler.size() * 10;
 		StringBuilder sb = new StringBuilder(kapasite);
@@ -38,7 +39,24 @@ public final class YazdirServis {
 		System.out.println(sb.toString());
 	}
 
-	public static void DetayYazdir() {
-		// TODO tur sonu seçilen sütuna göre ekrana yazma işlemi
+	// oyun sonu seçilen satır ve sütuna göre ekrana yazma işlemi yapar
+	@Override
+	public void detayYazdir(List<Sehir> sehirler, int index) {
+		// TODO oyun sonu seçilen satır ve sütuna göre ekrana yazma işlemi yapılacak
+		while(true) {			
+			sehirler.get(index).ekranaYazdir();
+			break;
+		}
 	}
+
+	//windows cmd için ekranı temizleyen metot
+	@Override
+	public void ekraniTemizle() {
+		try {
+			// ekranı temizle (cmd için)
+			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		} catch (Exception e) {
+		}
+	}
+
 }

@@ -11,7 +11,8 @@ package main;
 import java.util.Scanner;
 
 import motor.Oyun;
-import servisler.FakeDataServis;
+import servisler.TestYazdirServis;
+import servisler.YazdirServis;
 
 public class Main {
 
@@ -29,12 +30,20 @@ public class Main {
 			System.out.println("Sayilari girin");
 			String sayilarString = input.nextLine();
 
-			Oyun oyun = new Oyun(turSayisi, sayilarString);
+			Oyun oyun = new Oyun(turSayisi, sayilarString, new YazdirServis()); //gerçek uygulama esnasında
+			//Oyun oyun = new Oyun(turSayisi, sayilarString, new TestYazdirServis()); //test amaçlı çıktı
 			oyun.baslat();
 
 		} catch (Exception e) {
 			System.err.println("Hata meydana geldi: " + e.getMessage());
 		} finally {
+			System.out.println("\n------------------------------------------------");
+			System.out.println("Programdan cikmak icin ENTER tusuna basiniz...");
+			
+			if (input.hasNextLine()) {
+			    input.nextLine();
+			}
+			
 			input.close();
 			System.out.println("Simülasyon sonlandırıldı");
 		}
