@@ -7,6 +7,7 @@
 * </p>
 */
 package main;
+
 import java.util.Scanner;
 
 import motor.Oyun;
@@ -15,31 +16,29 @@ import servisler.FakeDataServis;
 public class Main {
 
 	public static void main(String[] args) {
-				
+
 		Scanner input = new Scanner(System.in);
-		
+
 		try {
-			
+
 			System.out.println("Tur sayısını girin: ");
 			int turSayisi = input.nextInt();
+			
+			input.nextLine(); // "önceki nextInt()'ten kalma '\n' karakterini yakalaması için"
+			
 			System.out.println("Sayilari girin");
 			String sayilarString = input.nextLine();
 
 			Oyun oyun = new Oyun(turSayisi, sayilarString);
-			// TODO oyun.baslat ekle
+			oyun.baslat();
+
 		} catch (Exception e) {
-			System.err.println("Hata meydana geldi" + e.getMessage());
+			System.err.println("Hata meydana geldi: " + e.getMessage());
 		} finally {
 			input.close();
 			System.out.println("Simülasyon sonlandırıldı");
 		}
-		
-		
-		System.out.println(FakeDataServis.getKisiAd());
-		System.out.println(FakeDataServis.getKisiSoyad());
-		System.out.println(FakeDataServis.getSehirAd());
-		System.out.println(FakeDataServis.getIlceAd());
-		System.out.println(FakeDataServis.getMahalleAd());
+
 	}
 
 }

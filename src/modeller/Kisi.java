@@ -13,6 +13,23 @@ import araclar.RastgeleSayi;
 import servisler.FakeDataServis;
 
 public class Kisi {
+	
+	public String getAd() {
+		return ad;
+	}
+
+	public String getSoyad() {
+		return soyad;
+	}
+
+	public int getYas() {
+		return yas;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	private String ad;
 	private String soyad;
 	private int yas;
@@ -22,6 +39,6 @@ public class Kisi {
 		ad = FakeDataServis.getKisiAd();
 		soyad = FakeDataServis.getKisiSoyad();
 		id = RastgeleSayi.getNextId(); //rastgele id üretir ()
-		yas = RastgeleSayi.getYas();
+		yas = RastgeleSayi.getNextYas();
 	}
 }

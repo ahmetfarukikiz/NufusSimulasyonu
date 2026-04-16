@@ -25,15 +25,8 @@ public abstract class Yerleske {
 		return ad;
 	}
 
-	public void setAd(String ad) {
-		this.ad = ad;
-	}
-
 	public int getNufus() {
 		return nufus;
 	}
 
-	public void setNufus(int nufus) {
-		this.nufus = nufus;
-	}
 }

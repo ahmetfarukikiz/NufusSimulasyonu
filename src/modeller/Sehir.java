@@ -19,6 +19,11 @@ import java.util.ArrayList;
 public class Sehir extends Yerleske {
 	private List<Ilce> ilceler;
 	
+	public List<Ilce> getIlceler() {
+		return ilceler;
+	}
+
+
 	public Sehir(int nufus){
 		super(FakeDataServis.getSehirAd(),nufus); //Sehir adi atamasi
 		ilceler = new ArrayList<Ilce>();

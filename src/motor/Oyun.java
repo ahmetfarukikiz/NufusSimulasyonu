@@ -9,22 +9,33 @@
 
 package motor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import modeller.Ilce;
+import modeller.Sehir;
 import servisler.OyunBaslaticiServis;
+import servisler.YazdirServis;
 
 public class Oyun {
 	private OyunBaslaticiServis oyunBaslaticiServis;
 	private int turSayisi;
 	private String sayilarString;
-	
-	public Oyun(int turSayisi, String sayilarString){
+	private List<Sehir> sehirler;
+
+	public Oyun(int turSayisi, String sayilarString) {
 		this.turSayisi = turSayisi;
 		this.sayilarString = sayilarString;
-		oyunBaslaticiServis =  new OyunBaslaticiServis();
+		sehirler = new ArrayList<Sehir>();
+		oyunBaslaticiServis = new OyunBaslaticiServis();
 	}
-	
-	
+
 	public void baslat() {
-		//Oyunun başlangıç kurallarına göre string içindeki sayıları alır organize eder ve modelleri oluşturur ve sehir listesi döndürür
-		oyunBaslaticiServis.stringtenYerleskeOlustur(sayilarString);
+		sehirler = oyunBaslaticiServis.stringtenYerleskeOlustur(sayilarString);
+		
+		//ana loop
+		for(int i = 0; i < turSayisi; i++)	{
+			YazdirServis.TurYazdir(sehirler);
+		}
 	}
 }
