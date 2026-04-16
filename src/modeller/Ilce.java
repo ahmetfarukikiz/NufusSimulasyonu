@@ -21,4 +21,14 @@ public class Ilce extends Yerleske {
 		super(FakeDataServis.getIlceAd(),nufus);
 		mahalleler = new ArrayList<Mahalle>();
 	}
+	
+	public void mahalleEkle(Mahalle mahalle) {
+		if(mahalle == null || mahalleler.contains(mahalle)) return;
+		mahalleler.add(mahalle);
+	}
+	
+	public void mahalleSil(Mahalle mahalle) {
+		if(mahalle == null || (!mahalleler.contains(mahalle))) return;
+		mahalleler.remove(mahalle);
+	}
 }

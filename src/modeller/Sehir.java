@@ -23,4 +23,15 @@ public class Sehir extends Yerleske {
 		super(FakeDataServis.getSehirAd(),nufus); //Sehir adi atamasi
 		ilceler = new ArrayList<Ilce>();
 	}
+	
+	
+	public void ilceEkle(Ilce ilce) {
+		if(ilce == null || ilceler.contains(ilce)) return;
+		ilceler.add(ilce);
+	}
+	
+	public void ilceSil(Ilce ilce) {
+		if(ilce == null || (!ilceler.contains(ilce))) return;
+		ilceler.remove(ilce);
+	}
 }

@@ -10,11 +10,30 @@
 package modeller;
 
 public abstract class Yerleske {
+
+
 	protected String ad;
 	protected int nufus;
 	
 	Yerleske(String ad, int nufus){
 		this.ad = ad;
+		this.nufus = nufus;
+	}
+	
+	
+	public String getAd() {
+		return ad;
+	}
+
+	public void setAd(String ad) {
+		this.ad = ad;
+	}
+
+	public int getNufus() {
+		return nufus;
+	}
+
+	public void setNufus(int nufus) {
 		this.nufus = nufus;
 	}
 }

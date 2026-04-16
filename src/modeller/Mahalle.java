@@ -23,4 +23,14 @@ public class Mahalle extends Yerleske {
     	super(FakeDataServis.getMahalleAd(),nufus);
         this.kisiler = new ArrayList<Kisi>(); 
     }
+    
+    public void kisiEkle(Kisi kisi) {
+		if(kisi == null || kisiler.contains(kisi)) return;
+		kisiler.add(kisi);
+	}
+	
+	public void kisiSil(Kisi kisi) {
+		if(kisi == null || (!kisiler.contains(kisi))) return;
+		kisiler.remove(kisi);
+	}
 }

@@ -21,7 +21,7 @@ public class Kisi {
 	public Kisi(){
 		ad = FakeDataServis.getKisiAd();
 		soyad = FakeDataServis.getKisiSoyad();
-		id = RastgeleSayi.getId(); //rastgele id üretir ()
+		id = RastgeleSayi.getNextId(); //rastgele id üretir ()
 		yas = RastgeleSayi.getYas();
 	}
 }

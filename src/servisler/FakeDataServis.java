@@ -13,26 +13,26 @@ import com.github.javafaker.Faker;
 import java.util.Locale;
 
 public class FakeDataServis {
-	private static final Faker faker = new Faker(Locale.of("us"));	
-	
+	private static final Faker faker = new Faker(Locale.of("us"));
+
 	public static String getKisiAd() {
 		return faker.name().firstName();
 	}
-	
+
 	public static String getKisiSoyad() {
 		return faker.name().lastName();
 	}
-	
-	public static String getSehirAd(){
+
+	public static String getSehirAd() {
 		return faker.address().state();
 	}
-	
+
 	public static String getIlceAd() {
 		return faker.address().city();
 	}
-	
+
 	public static String getMahalleAd() {
 		return faker.address().streetName();
 	}
-	
+
 }

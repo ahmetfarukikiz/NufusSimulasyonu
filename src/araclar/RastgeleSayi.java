@@ -17,7 +17,7 @@ public final class RastgeleSayi {
 	
 	private static final Random rastgele = new Random();
 	
-	public static int getId() {
+	public static int getNextId() {
 		int yeniId;
 		
 		do {
