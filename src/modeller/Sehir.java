@@ -12,7 +12,7 @@ package modeller;
 
 import java.util.List;
 
-import servisler.FakeDataServis;
+import araclar.FakeDataUretici;
 
 import java.util.ArrayList;
 
@@ -46,10 +46,9 @@ public class Sehir extends Yerleske {
 
 
 	public Sehir(int nufus){
-		super(FakeDataServis.getSehirAd(),nufus); //Sehir adi nufusu atamasi
+		super(FakeDataUretici.getSehirAd(),nufus); //Sehir adi nufusu atamasi
 		ilceler = new ArrayList<Ilce>();
 	}
-	
 	
 	public void ilceEkle(Ilce ilce) {
 		if(ilce == null) return;
@@ -57,8 +56,16 @@ public class Sehir extends Yerleske {
 	}
 	
 	public void ilceSil(Ilce ilce) {
-		if(ilce == null) return;
+		if(ilce == null || ilceler.isEmpty()) return;
 		ilceler.remove(ilce);
+	}
+	
+	//son elemanı siler ve return eder
+	public Ilce popIlce() {		 
+		if (ilceler == null || ilceler.isEmpty()) {
+	        return null;
+	    }
+		return ilceler.remove(ilceler.size() - 1); // son elemanı listeden sil ve return et
 	}
 	
 	public void yaslandir() {
@@ -79,11 +86,30 @@ public class Sehir extends Yerleske {
 		nufus = toplamNufus; //yeni nüfus
 	}	
 	
+	public void nufusGuncelle() {
+		int toplamNufus = 0;
+		
+		//her bir ilçe kendi nüfusunu hesaplar ve döndürür
+		for(Ilce ilce : ilceler) {
+			toplamNufus += ilce.nufusGuncelle();
+		}
+		
+		nufus = toplamNufus; //yeni nüfus
+	}
+	
 	public void ekranaYazdir() {
 		System.out.println(this.toString());
 		for(Ilce ilce : ilceler) {
 			ilce.ekranaYazdir();
 		}
 	}
+	
+	
+	public boolean dortBasamakli() {
+		return (nufus >= 1000 && nufus < 10000);
+	}
+
+
+	
 
 }

@@ -1,4 +1,4 @@
-package servisler;
+package motor;
 
 import java.util.List;
 

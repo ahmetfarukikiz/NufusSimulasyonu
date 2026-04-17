@@ -14,7 +14,7 @@ package modeller;
 import java.util.ArrayList;
 import java.util.List;
 
-import servisler.FakeDataServis;
+import araclar.FakeDataUretici;
 
 public class Mahalle extends Yerleske {
 	
@@ -32,7 +32,7 @@ public class Mahalle extends Yerleske {
 	private List<Kisi> kisiler;
 
     public Mahalle(int nufus) {
-    	super(FakeDataServis.getMahalleAd(),nufus);
+    	super(FakeDataUretici.getMahalleAd(),nufus);
         this.kisiler = new ArrayList<Kisi>(); 
     }
     
@@ -71,11 +71,23 @@ public class Mahalle extends Yerleske {
 			yeniNufus = artisOrani * nufus;
 			eklenecekKisiSayisi = yeniNufus - eskiNufus;
 		}
+
+		// TODO
+//		if (kisiler instanceof ArrayList) {
+//		    ((ArrayList<Kisi>) kisiler).ensureCapacity(yeniNufus);
+//		}
+		
 		for(int i = 0; i < eklenecekKisiSayisi; i++) {
 			kisiler.add(new Kisi());
 		}
 			
 		nufus = yeniNufus;
+		return nufus;
+	}
+
+
+	public int nufusGuncelle() {
+		nufus = kisiler.size(); //yeni nüfus
 		return nufus;
 	}
 	

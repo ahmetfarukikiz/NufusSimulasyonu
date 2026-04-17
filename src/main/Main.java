@@ -10,6 +10,7 @@ package main;
 
 import java.util.Scanner;
 
+import araclar.BaslangicStringCevirici;
 import motor.Oyun;
 import servisler.TestYazdirServis;
 import servisler.YazdirServis;
@@ -29,8 +30,9 @@ public class Main {
 			
 			System.out.println("Sayilari girin");
 			String sayilarString = input.nextLine();
+			int[] sayiDizi = BaslangicStringCevirici.stringiSayiyaCevir(sayilarString);
 
-			Oyun oyun = new Oyun(turSayisi, sayilarString, new YazdirServis()); //gerçek uygulama esnasında
+			Oyun oyun = new Oyun(turSayisi, sayiDizi, new YazdirServis()); //gerçek uygulama esnasında
 			//Oyun oyun = new Oyun(turSayisi, sayilarString, new TestYazdirServis()); //test amaçlı çıktı
 			oyun.baslat();
 

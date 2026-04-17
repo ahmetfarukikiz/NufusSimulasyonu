@@ -7,12 +7,12 @@
 * </p>
 */
 
-package servisler;
+package araclar;
 
 import com.github.javafaker.Faker;
 import java.util.Locale;
 
-public class FakeDataServis {
+public final class FakeDataUretici {
 	private static final Faker faker = new Faker(Locale.of("us"));
 
 	public static String getKisiAd() {

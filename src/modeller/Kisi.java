@@ -9,23 +9,30 @@
 
 package modeller;
 
+import araclar.FakeDataUretici;
 import araclar.IDGenerator;
-import servisler.FakeDataServis;
 
 public class Kisi {
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(35);
-		return sb.append("\t").append(id).append("-").append(ad).append(soyad).append("-").append(yas).toString();
+		return sb.append("\t").append(id).append("-").append(getAd()).append(getSoyad()).append("-").append(yas).toString();
 	}
 
+	// ad ve soyad değerleri sadece kullanılacağı zaman atanıyor (performans için)
 	public String getAd() {
-		return ad;
+//		if (this.ad == null) {
+//	        this.ad = FakeDataServis.getKisiAd();
+//	    }
+	    return this.ad;
 	}
 
 	public String getSoyad() {
-		return soyad;
+//		if (this.soyad == null) {
+//	        this.soyad = FakeDataServis.getKisiSoyad();
+//	    }
+	    return this.soyad;
 	}
 
 	public int getYas() {
@@ -42,10 +49,10 @@ public class Kisi {
 	private int id;
 	
 	public Kisi(){
-		ad = FakeDataServis.getKisiAd();
-		soyad = FakeDataServis.getKisiSoyad();
+		ad = FakeDataUretici.getKisiAd();
+		soyad = FakeDataUretici.getKisiSoyad();
 		id = IDGenerator.getNextId(); //rastgele id üretir ()
-		yas = FakeDataServis.getKisiYas();
+		yas = FakeDataUretici.getKisiYas();
 	}
 	
 	public void yaslandir() {

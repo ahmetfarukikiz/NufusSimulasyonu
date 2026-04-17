@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 import modeller.Sehir;
+import motor.IYazdirici;
 
 public final class YazdirServis implements IYazdirici {
 
@@ -42,11 +43,8 @@ public final class YazdirServis implements IYazdirici {
 
 	// oyun sonu seçilen satır ve sütuna göre ekrana yazma işlemi yapar
 	@Override
-	public void detayYazdir(List<Sehir> sehirler, int index) {
-		while(true) {			
+	public void detayYazdir(List<Sehir> sehirler, int index) {		
 			sehirler.get(index).ekranaYazdir();
-			break;
-		}
 	}
 
 	//İşletim sisteminin kendi konsolu için ekranı temizleyen metot

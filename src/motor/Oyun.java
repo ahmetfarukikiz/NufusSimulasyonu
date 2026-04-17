@@ -13,23 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import modeller.Ilce;
-import modeller.Kisi;
-import modeller.Mahalle;
 import modeller.Sehir;
-import servisler.IYazdirici;
 import servisler.OyunBaslaticiServis;
 
 public class Oyun {
 	private OyunBaslaticiServis oyunBaslaticiServis;
 	private IYazdirici yazdirici;
 	private int toplamTurSayisi;
-	private String sayilarString;
+	private int[] sayiDizi;
 	private List<Sehir> sehirler;
 
-	public Oyun(int turSayisi, String sayilarString, IYazdirici yazdirici) {
+	public Oyun(int turSayisi, int[] sayiDizi, IYazdirici yazdirici) {
 		this.toplamTurSayisi = turSayisi;
-		this.sayilarString = sayilarString;
+		this.sayiDizi = sayiDizi;
 		sehirler = new ArrayList<Sehir>();
 		oyunBaslaticiServis = new OyunBaslaticiServis();
 		this.yazdirici = yazdirici; // gelen yazdırma nesnesine göre test amaçlı veya gerçek formatta çıktı
@@ -38,7 +34,7 @@ public class Oyun {
 	}
 
 	public void baslat() {
-		sehirler = oyunBaslaticiServis.stringtenYerleskeOlustur(sayilarString);
+		sehirler = oyunBaslaticiServis.yerleskeOlustur(sayiDizi);
 
 		System.out.println("Başlangıç Durumu:");
 		yazdirici.TurYazdir(sehirler);
@@ -47,10 +43,23 @@ public class Oyun {
 		// ana loop (TUR DÖNGÜSÜ)
 		for (int tur = 1; tur <= toplamTurSayisi; tur++) {
 
-			for (Sehir sehir : sehirler) {
+			//her tur bölünmeyle oluşacak şehirleri tutacak geçici liste
+			List<Sehir> yeniSehirler = new ArrayList<Sehir>();
+			
+			//tur işlemleri
+ 			for (Sehir sehir : sehirler) {
 				sehir.nufusArttir();
 				sehir.yaslandir();
+				
+				// şehrin tur işlemlerinden sonra dört basamaklıysa böl
+				if(sehir.dortBasamakli()) {
+					Sehir yeniSehir = sehriBol(sehir);
+					yeniSehirler.add(yeniSehir);
+				}
 			}
+ 			
+ 			// tur bittikten sonra bölünmeyle gelen şehirleri asıl listeye ekle
+ 			sehirler.addAll(yeniSehirler);
 
 			System.out.println(tur + ".tur sonu:");
 			yazdirici.TurYazdir(sehirler);
@@ -62,6 +71,46 @@ public class Oyun {
 
 		oyunSonuSatirSutunSor();
 
+	}
+	
+	public Sehir sehriBol(Sehir sehir) {
+		// başta 0 nüfuslu boş bir şehir oluştur
+		Sehir yeniSehir = new Sehir(0);
+		int ilceSayisi = sehir.getIlceler().size();
+		
+		//ilçe 1 ise
+		if(ilceSayisi == 1) {
+			int mahalleSayisi = sehir.getIlceler().get(0).getMahalleler().size();
+			//ilçe ve mahalle sayısı 1 ise
+			if( mahalleSayisi == 1) { 
+				System.out.println("i 1 m 1");
+				// TODO
+			}
+			// ilçe 1, mahalle 2 veya 2+ ise
+			else {
+				// TODO
+				System.out.println("i 1 m 2+");
+
+			}
+		}
+		
+		//ilçe 2 veya 2+ ise
+		else {
+			//tam sayı bölmesiyle tek sayıysa 1 eksik aktarılacak
+			int aktIlceSay =  ilceSayisi / 2; 
+
+			for(int i = 0; i < aktIlceSay; i++) {
+				 yeniSehir.ilceEkle(sehir.popIlce());
+
+			}
+		}
+			
+		
+
+		yeniSehir.nufusGuncelle(); 
+		sehir.nufusGuncelle();
+		return yeniSehir;
+		
 	}
 
 	private void oyunSonuSatirSutunSor() {

@@ -3,13 +3,16 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 14.04.2026
 * <p>
-* Kullanıcıdan alınan stringi parçalayıp başlangıç kurallarına göre sayıları hesaplayarak yerleşke ve kişi modellerini oluşturan sınıf
+* Kullanıcıdan alınan stringi parçalayıp başlangıç kurallarına göre hesaplanmış sayılarla yerleşke ve kişi modellerini oluşturan sınıf
 * </p>
 */
 
 package servisler;
 
 import java.util.List;
+
+import araclar.BaslangicKuralHesaplayici;
+
 import java.util.ArrayList;
 
 import modeller.Ilce;
@@ -18,15 +21,14 @@ import modeller.Mahalle;
 import modeller.Sehir;
 
 public class OyunBaslaticiServis {
+	
 	public OyunBaslaticiServis() {
 
 	}
 
 	// Oyunun başlangıç değerlerini ayarlar ve içi dolu şehir listesini döndürür
-	public List<Sehir> stringtenYerleskeOlustur(String sayilarString) {
+	public List<Sehir> yerleskeOlustur(int[] sayiDizi) {
 		List<Sehir> sehirler = new ArrayList<Sehir>();
-
-		int[] sayiDizi = stringiSayiyaCevir(sayilarString);
 
 		// birim sayıları tutan değişkenler
 		int sehirSayisi, ilceSayisi, b_mahalleSayisi, nufus;
@@ -35,7 +37,7 @@ public class OyunBaslaticiServis {
 		// şehirler döngüsü
 		for (int sayi : sayiDizi) {
 
-			sayi = gercekSayiHesapla(sayi); // mahalleler ilcelere esit paylasılabiliyor
+			sayi = BaslangicKuralHesaplayici.gercekSayiHesapla(sayi); // mahalleler ilcelere esit paylasılabiliyor
 
 			short onlar, birler;
 			onlar = (short) ((sayi % 100) / 10);
@@ -43,7 +45,7 @@ public class OyunBaslaticiServis {
 
 			ilceSayisi = onlar;
 
-			nufus = gercekNufusHesapla(sayi, birler); // nufus mahallelere eşit paylaştırılabiliyor
+			nufus = BaslangicKuralHesaplayici.gercekNufusHesapla(sayi, birler); // nufus mahallelere eşit paylaştırılabiliyor
 
 			Sehir sehir = new Sehir(nufus);
 
@@ -95,46 +97,9 @@ public class OyunBaslaticiServis {
 	}
 	
 	
-	// TODO duruma göre bu kısım farklı bir sınıfa taşınabilir (tek sorumluluk)
-
-	// Mahalleleri ilçelere eşit dağılabilir hale getirir
-	private int gercekSayiHesapla(int sayi) {
-		int gercekSayi = sayi;
-		short onlar, birler;
-		onlar = (short) ((sayi % 100) / 10);
-		birler = (short) (sayi % 10);
-
-		while (birler == 0 || birler % onlar != 0) {
-			birler = (short) ((birler + 1) % 10);
-		}
-
-		gercekSayi = (onlar * 10) + birler;
-		return gercekSayi;
-	}
-
-	// toplam nüfusu sayıyı mahalle sayısına dağılabilir (bölünebilir hale getirir) örn: 18->24  24 % 4 == 0
-	private int gercekNufusHesapla(int nufus, int mahalleSayisi) {
-		int gercekNufus = nufus;
-
-		while (gercekNufus % mahalleSayisi != 0) {
-			gercekNufus++;
-		}
-
-		return gercekNufus;
-	}
+	
 
 	
-	// string halinde gelen veriyi sayı dizisine çevirir
-	private int[] stringiSayiyaCevir(String sayilarString) {
-		String[] sayiStDizi = sayilarString.split(" ");
-
-		// üzerinde hesaplama yapacağımız sayı dizisi
-		int[] sayiDizi = new int[sayiStDizi.length];
-
-		for (int i = 0; i < sayiStDizi.length; i++) { // stringleri sayılara çevirme 12 43 21
-			sayiDizi[i] = Integer.parseInt(sayiStDizi[i]);
-		}
-		return sayiDizi;
-	}
+	
 
 }

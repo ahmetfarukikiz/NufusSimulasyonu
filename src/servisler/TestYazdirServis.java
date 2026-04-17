@@ -15,6 +15,7 @@ package servisler;
 import java.util.List;
 
 import modeller.*;
+import motor.IYazdirici;
 
 public class TestYazdirServis implements IYazdirici {
 

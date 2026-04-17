@@ -10,8 +10,10 @@
 package modeller;
 
 import java.util.List;
+
+import araclar.FakeDataUretici;
+
 import java.util.ArrayList;
-import servisler.FakeDataServis;
 
 public class Ilce extends Yerleske {
 	
@@ -28,7 +30,7 @@ public class Ilce extends Yerleske {
 	private List<Mahalle> mahalleler;
 	
 	public Ilce(int nufus) {
-		super(FakeDataServis.getIlceAd(),nufus);
+		super(FakeDataUretici.getIlceAd(),nufus);
 		mahalleler = new ArrayList<Mahalle>();
 	}
 	
@@ -63,6 +65,18 @@ public class Ilce extends Yerleske {
 			mahalle.ekranaYazdir();
 		}
 		
+	}
+
+	public int nufusGuncelle() {
+		int toplamNufus = 0;
+		
+		//her bir ilçe kendi nüfusunu hesaplar ve döndürür
+		for(Mahalle mahalle : mahalleler) {
+			toplamNufus += mahalle.nufusGuncelle();
+		}
+		
+		nufus = toplamNufus; //yeni nüfus
+		return nufus;
 	}
 	
 }
