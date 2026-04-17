@@ -11,17 +11,13 @@ package araclar;
 
 import java.util.Random;
 
-public final class RastgeleSayi {
+public final class IDGenerator {
 private static int NextId = 100; 
     
     private static final Random rastgele = new Random();
     
     public static int getNextId() {
         return NextId++; //değeri döner sonra 1 arttırır
-    }
-    
-    public static int getNextYas() {
-        return rastgele.nextInt(51); // 0-50 arası
     }
 	
 }

@@ -3,7 +3,7 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 14.04.2026
 * <p>
-* 
+* Kullanıcıdan alınan stringi parçalayıp başlangıç kurallarına göre sayıları hesaplayarak yerleşke ve kişi modellerini oluşturan sınıf
 * </p>
 */
 
@@ -22,6 +22,7 @@ public class OyunBaslaticiServis {
 
 	}
 
+	// Oyunun başlangıç değerlerini ayarlar ve içi dolu şehir listesini döndürür
 	public List<Sehir> stringtenYerleskeOlustur(String sayilarString) {
 		List<Sehir> sehirler = new ArrayList<Sehir>();
 
@@ -92,6 +93,9 @@ public class OyunBaslaticiServis {
 			mahalle.kisiEkle(kisi);
 		}
 	}
+	
+	
+	// TODO duruma göre bu kısım farklı bir sınıfa taşınabilir (tek sorumluluk)
 
 	// Mahalleleri ilçelere eşit dağılabilir hale getirir
 	private int gercekSayiHesapla(int sayi) {

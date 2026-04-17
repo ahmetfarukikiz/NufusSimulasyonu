@@ -59,4 +59,24 @@ public class Mahalle extends Yerleske {
 			kisi.ekranaYazdir();
 		}		
 	}
+
+
+	public int nufusArttir(int artisOrani) {
+		int eklenecekKisiSayisi, yeniNufus;
+		if(artisOrani == 0) {
+			eklenecekKisiSayisi = 1;
+			yeniNufus = nufus + 1;
+		} else {
+			int eskiNufus = nufus;
+			yeniNufus = artisOrani * nufus;
+			eklenecekKisiSayisi = yeniNufus - eskiNufus;
+		}
+		for(int i = 0; i < eklenecekKisiSayisi; i++) {
+			kisiler.add(new Kisi());
+		}
+			
+		nufus = yeniNufus;
+		return nufus;
+	}
+	
 }

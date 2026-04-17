@@ -22,7 +22,7 @@ public class TestYazdirServis implements IYazdirici {
     public void TurYazdir(List<Sehir> sehirler) {
         if (sehirler == null || sehirler.isEmpty()) return;
 
-        System.out.println("--- YAŞ ARTIŞ TESTİ ---");
+        System.out.println("--- Yaş Artış TESTI ---");
         
         Sehir ilkSehir = sehirler.get(0);
         
@@ -34,11 +34,9 @@ public class TestYazdirServis implements IYazdirici {
                 
                 List<Kisi> kisiler = mahalleler.get(0).getKisiler();
                 
-                // Sadece ilk 3 kişinin yaşını (eğer 3'ten az kişi varsa olanları) yazdır
                 int gosterilecekSayi = Math.min(10, kisiler.size());
                 for (int i = 0; i < gosterilecekSayi; i++) {
                     Kisi k = kisiler.get(i);
-                    // Kişi sınıfında getId() ve getYas() metotlarının olduğunu varsayıyoruz
                     System.out.println((i + 1) + ". Kişi (ID: " + k.getId() + ") Güncel Yaşı: " + k.getYas());
                 }
             }

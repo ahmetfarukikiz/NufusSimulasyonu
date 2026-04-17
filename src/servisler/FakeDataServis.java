@@ -35,4 +35,8 @@ public class FakeDataServis {
 		return faker.address().streetName();
 	}
 
+	public static int getKisiYas() {
+		return faker.number().numberBetween(0, 51);
+	}
+
 }

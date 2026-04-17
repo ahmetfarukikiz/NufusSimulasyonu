@@ -48,6 +48,15 @@ public class Ilce extends Yerleske {
 		}
 	}
 
+	public int nufusArttir(int artisOrani) {
+		int yeniNufus = 0;
+		for(Mahalle mahalle : mahalleler) {
+			yeniNufus += mahalle.nufusArttir(artisOrani);
+		}
+		nufus = yeniNufus;
+		return nufus;
+	}
+	
 	public void ekranaYazdir() {
 		System.out.println(this.toString());
 		for(Mahalle mahalle : mahalleler) {

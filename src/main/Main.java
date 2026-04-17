@@ -37,7 +37,7 @@ public class Main {
 		} catch (Exception e) {
 			System.err.println("Hata meydana geldi: " + e.getMessage());
 		} finally {
-			System.out.println("\n------------------------------------------------");
+			
 			System.out.println("Programdan cikmak icin ENTER tusuna basiniz...");
 			
 			if (input.hasNextLine()) {

@@ -9,7 +9,7 @@
 
 package modeller;
 
-import araclar.RastgeleSayi;
+import araclar.IDGenerator;
 import servisler.FakeDataServis;
 
 public class Kisi {
@@ -44,8 +44,8 @@ public class Kisi {
 	public Kisi(){
 		ad = FakeDataServis.getKisiAd();
 		soyad = FakeDataServis.getKisiSoyad();
-		id = RastgeleSayi.getNextId(); //rastgele id üretir ()
-		yas = RastgeleSayi.getNextYas();
+		id = IDGenerator.getNextId(); //rastgele id üretir ()
+		yas = FakeDataServis.getKisiYas();
 	}
 	
 	public void yaslandir() {

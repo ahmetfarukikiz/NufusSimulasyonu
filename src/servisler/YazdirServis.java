@@ -9,6 +9,7 @@
 
 package servisler;
 
+import java.io.IOException;
 import java.util.List;
 
 import modeller.Sehir;
@@ -42,20 +43,22 @@ public final class YazdirServis implements IYazdirici {
 	// oyun sonu seçilen satır ve sütuna göre ekrana yazma işlemi yapar
 	@Override
 	public void detayYazdir(List<Sehir> sehirler, int index) {
-		// TODO oyun sonu seçilen satır ve sütuna göre ekrana yazma işlemi yapılacak
 		while(true) {			
 			sehirler.get(index).ekranaYazdir();
 			break;
 		}
 	}
 
-	//windows cmd için ekranı temizleyen metot
+	//İşletim sisteminin kendi konsolu için ekranı temizleyen metot
 	@Override
 	public void ekraniTemizle() {
 		try {
-			// ekranı temizle (cmd için)
-			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		} catch (Exception e) {
+			// ekranı temizle (windows cmd için)
+			if(System.getProperty("os.name").contains("Windows"))
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			else
+				new ProcessBuilder("clear").inheritIO().start().waitFor();
+		} catch (IOException | InterruptedException ex) {
 		}
 	}
 
