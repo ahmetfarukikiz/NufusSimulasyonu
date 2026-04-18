@@ -81,4 +81,12 @@ public class Ilce extends Yerleske {
 		return nufus;
 	}
 
+	public Mahalle popMahalle() {
+		if (mahalleler == null || mahalleler.isEmpty()) {
+			return null;
+		}
+		// son elemanı listeden sil ve return et
+		return mahalleler.remove(mahalleler.size() - 1); 
+	}
+
 }

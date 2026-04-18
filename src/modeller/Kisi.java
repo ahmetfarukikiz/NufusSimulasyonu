@@ -21,18 +21,18 @@ public class Kisi {
 				.toString();
 	}
 
-	// ad ve soyad değerleri sadece kullanılacağı zaman atanıyor (performans için)
+	// ad ve soyad değerleri sadece ilk kez kullanılacağı zaman atanıyor (performans için)
 	public String getAd() {
-//		if (this.ad == null) {
-//	        this.ad = FakeDataServis.getKisiAd();
-//	    }
+		if (this.ad == null) {
+	        this.ad = FakeDataUretici.getKisiAd();
+	    }
 		return this.ad;
 	}
 
 	public String getSoyad() {
-//		if (this.soyad == null) {
-//	        this.soyad = FakeDataServis.getKisiSoyad();
-//	    }
+		if (this.soyad == null) {
+	        this.soyad = FakeDataUretici.getKisiSoyad();
+	    }
 		return this.soyad;
 	}
 
@@ -50,8 +50,6 @@ public class Kisi {
 	private int id;
 
 	public Kisi() {
-		ad = FakeDataUretici.getKisiAd();
-		soyad = FakeDataUretici.getKisiSoyad();
 		id = IDUretici.getNextId(); // rastgele id üretir ()
 		yas = FakeDataUretici.getKisiYas();
 	}

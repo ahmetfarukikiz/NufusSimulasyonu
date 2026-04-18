@@ -63,7 +63,8 @@ public class Sehir extends Yerleske {
 		if (ilceler == null || ilceler.isEmpty()) {
 			return null;
 		}
-		return ilceler.remove(ilceler.size() - 1); // son elemanı listeden sil ve return et
+		// son elemanı listeden sil ve return et
+		return ilceler.remove(ilceler.size() - 1); 
 	}
 
 	public void yaslandir() {

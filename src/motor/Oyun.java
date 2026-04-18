@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import modeller.Ilce;
+import modeller.Mahalle;
 import modeller.Sehir;
 import servisler.OyunBaslaticiServis;
 
@@ -74,23 +76,41 @@ public class Oyun {
 
 	public Sehir sehriBol(Sehir sehir) {
 		// başta 0 nüfuslu boş bir şehir oluştur
+		Sehir eskiSehir = sehir;
 		Sehir yeniSehir = new Sehir(0);
-		int ilceSayisi = sehir.getIlceler().size();
+		int ilceSayisi = eskiSehir.getIlceler().size();
 
-		// ilçe 1 ise
+		// ilce 1 ise:
 		if (ilceSayisi == 1) {
-			int mahalleSayisi = sehir.getIlceler().get(0).getMahalleler().size();
+
+			Ilce eskiIlce = eskiSehir.getIlceler().get(0); //başta 0 nüfuslu boş bir ilçe oluştur
+			Ilce yeniIlce = new Ilce(0);
+			int mahalleSayisi = eskiIlce.getMahalleler().size(); // 1 ilçe var o da ilk ilçe
+			
 			// ilçe ve mahalle sayısı 1 ise
 			if (mahalleSayisi == 1) {
 				System.out.println("i 1 m 1");
-				// TODO
+				Mahalle eskiMahalle = eskiIlce.getMahalleler().get(0);
+				Mahalle yeniMahalle = new Mahalle(0);
+				int kisiSayisi = eskiMahalle.getNufus();
+				
+				int aktKisiSay = kisiSayisi / 2;
+				for(int i = 0; i < aktKisiSay; i++) {
+					yeniMahalle.kisiEkle(eskiMahalle.popKisi());
+				}
+				yeniIlce.mahalleEkle(yeniMahalle);
+				
 			}
-			// ilçe 1, mahalle 2 veya 2+ ise
+			
+			// ilçe 1, mahalle 2 veya 2+ ise:
 			else {
-				// TODO
 				System.out.println("i 1 m 2+");
-
+				int aktMahSay = mahalleSayisi / 2;
+				for(int i = 0; i < aktMahSay; i++) {
+					yeniIlce.mahalleEkle(eskiIlce.popMahalle());
+				}
 			}
+			yeniSehir.ilceEkle(yeniIlce); 
 		}
 
 		// ilçe 2 veya 2+ ise
@@ -99,13 +119,14 @@ public class Oyun {
 			int aktIlceSay = ilceSayisi / 2;
 
 			for (int i = 0; i < aktIlceSay; i++) {
-				yeniSehir.ilceEkle(sehir.popIlce());
+				yeniSehir.ilceEkle(eskiSehir.popIlce());
 
 			}
 		}
 
+		// aktarılan kişi sayısına göre alttan üste nüfus güncellemesi yapar
 		yeniSehir.nufusGuncelle();
-		sehir.nufusGuncelle();
+		eskiSehir.nufusGuncelle();
 		return yeniSehir;
 
 	}
@@ -120,21 +141,21 @@ public class Oyun {
 		while (true) {
 			try {
 				System.out.println("Satır Girin (0'dan başlar):");
-				 //int'e dönüştüremezse NumberFormatException döndürür ve catch bunu yakalar
+				// int'e dönüştüremezse NumberFormatException döndürür ve catch bunu yakalar
 				satir = Integer.parseInt(input.nextLine().trim());
-				
+
 				System.out.println("Sütun Girin (0'dan başlar):");
-				sutun = Integer.parseInt(input.nextLine().trim());	
-				
+				sutun = Integer.parseInt(input.nextLine().trim());
+
 				index = satir * 5 + sutun; // her satırda 5 eleman var
-	
+
 				if (index < 0 || index >= sehirler.size()) {
 					System.out.println("Hatalı index tekrar deneyin.");
 					continue;
 				}
-	
+
 				break;
-			} catch(NumberFormatException e){
+			} catch (NumberFormatException e) {
 				System.out.println("Hata, sadece tam sayı giriniz");
 			}
 		}

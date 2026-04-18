@@ -88,4 +88,12 @@ public class Mahalle extends Yerleske {
 		return nufus;
 	}
 
+	public Kisi popKisi() {
+		if (kisiler == null || kisiler.isEmpty()) {
+			return null;
+		}
+		// son elemanı listeden sil ve return et
+		return kisiler.remove(kisiler.size() - 1); 
+	}
+
 }
