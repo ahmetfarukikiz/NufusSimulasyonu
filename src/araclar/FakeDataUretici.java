@@ -3,7 +3,7 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 13.04.2026
 * <p>
-* Faker kütüphanesini saran ve gerekli bilgileri sınıflara sağlayan wrapper class
+* Faker kütüphanesini saran ve gerekli bilgileri sınıflara sağlayan wrapper class.
 * </p>
 */
 

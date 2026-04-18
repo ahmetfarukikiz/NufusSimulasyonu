@@ -3,7 +3,8 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 14.04.2026
 * <p>
-* Kullanıcıdan alınan stringi parçalayıp başlangıç kurallarına göre hesaplanmış sayılarla yerleşke ve kişi modellerini oluşturan sınıf
+* Aldığı sayıları BaslangicKuralHesaplayici sınıfıyla kullanmaya uygun hale getirir. 
+* Bu sayılarla Yerleşke ve kişi modellerini oluşturur. Oyun sınıfına içi dolu Şehir listesi döndürür.
 * </p>
 */
 
@@ -21,7 +22,7 @@ import modeller.Mahalle;
 import modeller.Sehir;
 
 public class OyunBaslaticiServis {
-	
+
 	public OyunBaslaticiServis() {
 
 	}
@@ -45,10 +46,12 @@ public class OyunBaslaticiServis {
 
 			ilceSayisi = onlar;
 
-			nufus = BaslangicKuralHesaplayici.gercekNufusHesapla(sayi, birler); // nufus mahallelere eşit paylaştırılabiliyor
+			nufus = BaslangicKuralHesaplayici.gercekNufusHesapla(sayi, birler); // nufus mahallelere eşit
+																				// paylaştırılabiliyor
 
 			Sehir sehir = new Sehir(nufus);
 
+			// ilçe başına mahalle sayısı
 			b_mahalleSayisi = birler / onlar;
 
 			ilceleriOlustur(sehir, ilceSayisi, b_mahalleSayisi);
@@ -95,11 +98,5 @@ public class OyunBaslaticiServis {
 			mahalle.kisiEkle(kisi);
 		}
 	}
-	
-	
-	
-
-	
-	
 
 }

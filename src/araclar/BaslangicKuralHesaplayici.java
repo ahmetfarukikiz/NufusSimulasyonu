@@ -11,28 +11,29 @@ package araclar;
 
 public final class BaslangicKuralHesaplayici {
 	// Mahalleleri ilçelere eşit dağılabilir hale getirir
-		public static int gercekSayiHesapla(int sayi) {
-			int gercekSayi = sayi;
-			short onlar, birler;
-			onlar = (short) ((sayi % 100) / 10);
-			birler = (short) (sayi % 10);
+	public static int gercekSayiHesapla(int sayi) {
+		int gercekSayi = sayi;
+		short onlar, birler;
+		onlar = (short) ((sayi % 100) / 10);
+		birler = (short) (sayi % 10);
 
-			while (birler == 0 || birler % onlar != 0) {
-				birler = (short) ((birler + 1) % 10);
-			}
-
-			gercekSayi = (onlar * 10) + birler;
-			return gercekSayi;
+		while (birler == 0 || birler % onlar != 0) {
+			birler = (short) ((birler + 1) % 10);
 		}
 
-		// toplam nüfusu sayıyı mahalle sayısına dağılabilir (bölünebilir hale getirir) örn: 18->24  24 % 4 == 0
-		public static int gercekNufusHesapla(int nufus, int mahalleSayisi) {
-			int gercekNufus = nufus;
+		gercekSayi = (onlar * 10) + birler;
+		return gercekSayi;
+	}
 
-			while (gercekNufus % mahalleSayisi != 0) {
-				gercekNufus++;
-			}
+	// toplam nüfusu sayıyı mahalle sayısına dağılabilir (bölünebilir hale getirir)
+	// örn: 18->24 24 % 4 == 0
+	public static int gercekNufusHesapla(int nufus, int mahalleSayisi) {
+		int gercekNufus = nufus;
 
-			return gercekNufus;
+		while (gercekNufus % mahalleSayisi != 0) {
+			gercekNufus++;
 		}
+
+		return gercekNufus;
+	}
 }

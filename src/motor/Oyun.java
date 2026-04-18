@@ -39,27 +39,26 @@ public class Oyun {
 		System.out.println("Başlangıç Durumu:");
 		yazdirici.TurYazdir(sehirler);
 
-
 		// ana loop (TUR DÖNGÜSÜ)
 		for (int tur = 1; tur <= toplamTurSayisi; tur++) {
 
-			//her tur bölünmeyle oluşacak şehirleri tutacak geçici liste
+			// her tur bölünmeyle oluşacak şehirleri tutacak geçici liste
 			List<Sehir> yeniSehirler = new ArrayList<Sehir>();
-			
-			//tur işlemleri
- 			for (Sehir sehir : sehirler) {
+
+			// tur işlemleri
+			for (Sehir sehir : sehirler) {
 				sehir.nufusArttir();
 				sehir.yaslandir();
-				
+
 				// şehrin tur işlemlerinden sonra dört basamaklıysa böl
-				if(sehir.dortBasamakli()) {
+				if (sehir.dortBasamakli()) {
 					Sehir yeniSehir = sehriBol(sehir);
 					yeniSehirler.add(yeniSehir);
 				}
 			}
- 			
- 			// tur bittikten sonra bölünmeyle gelen şehirleri asıl listeye ekle
- 			sehirler.addAll(yeniSehirler);
+
+			// tur bittikten sonra bölünmeyle gelen şehirleri asıl listeye ekle
+			sehirler.addAll(yeniSehirler);
 
 			System.out.println(tur + ".tur sonu:");
 			yazdirici.TurYazdir(sehirler);
@@ -72,17 +71,17 @@ public class Oyun {
 		oyunSonuSatirSutunSor();
 
 	}
-	
+
 	public Sehir sehriBol(Sehir sehir) {
 		// başta 0 nüfuslu boş bir şehir oluştur
 		Sehir yeniSehir = new Sehir(0);
 		int ilceSayisi = sehir.getIlceler().size();
-		
-		//ilçe 1 ise
-		if(ilceSayisi == 1) {
+
+		// ilçe 1 ise
+		if (ilceSayisi == 1) {
 			int mahalleSayisi = sehir.getIlceler().get(0).getMahalleler().size();
-			//ilçe ve mahalle sayısı 1 ise
-			if( mahalleSayisi == 1) { 
+			// ilçe ve mahalle sayısı 1 ise
+			if (mahalleSayisi == 1) {
 				System.out.println("i 1 m 1");
 				// TODO
 			}
@@ -93,24 +92,22 @@ public class Oyun {
 
 			}
 		}
-		
-		//ilçe 2 veya 2+ ise
-		else {
-			//tam sayı bölmesiyle tek sayıysa 1 eksik aktarılacak
-			int aktIlceSay =  ilceSayisi / 2; 
 
-			for(int i = 0; i < aktIlceSay; i++) {
-				 yeniSehir.ilceEkle(sehir.popIlce());
+		// ilçe 2 veya 2+ ise
+		else {
+			// tam sayı bölmesiyle tek sayıysa 1 eksik aktarılacak
+			int aktIlceSay = ilceSayisi / 2;
+
+			for (int i = 0; i < aktIlceSay; i++) {
+				yeniSehir.ilceEkle(sehir.popIlce());
 
 			}
 		}
-			
-		
 
-		yeniSehir.nufusGuncelle(); 
+		yeniSehir.nufusGuncelle();
 		sehir.nufusGuncelle();
 		return yeniSehir;
-		
+
 	}
 
 	private void oyunSonuSatirSutunSor() {
@@ -119,6 +116,7 @@ public class Oyun {
 
 		int satir, sutun, index;
 
+		// uygunsuz index girilirse döngü devam eder
 		while (true) {
 			System.out.println("Satır Girin (0'dan başlar):");
 			satir = input.nextInt();

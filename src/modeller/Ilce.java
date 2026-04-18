@@ -3,7 +3,7 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 11.04.2026
 * <p>
-* Ilceye ait verileri tutan model sınıfı
+* Ilceye ait verileri tutar ve bu verilere ait iç hesaplamaları yapar.
 * </p>
 */
 
@@ -16,7 +16,7 @@ import araclar.FakeDataUretici;
 import java.util.ArrayList;
 
 public class Ilce extends Yerleske {
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(35);
@@ -28,55 +28,57 @@ public class Ilce extends Yerleske {
 	}
 
 	private List<Mahalle> mahalleler;
-	
+
 	public Ilce(int nufus) {
-		super(FakeDataUretici.getIlceAd(),nufus);
+		super(FakeDataUretici.getIlceAd(), nufus);
 		mahalleler = new ArrayList<Mahalle>();
 	}
-	
+
 	public void mahalleEkle(Mahalle mahalle) {
-		if(mahalle == null) return;
+		if (mahalle == null)
+			return;
 		mahalleler.add(mahalle);
 	}
-	
+
 	public void mahalleSil(Mahalle mahalle) {
-		if(mahalle == null) return;
+		if (mahalle == null)
+			return;
 		mahalleler.remove(mahalle);
 	}
-	
+
 	public void yaslandir() {
-		for(Mahalle mahalle : mahalleler) {
+		for (Mahalle mahalle : mahalleler) {
 			mahalle.yaslandir();
 		}
 	}
 
 	public int nufusArttir(int artisOrani) {
 		int yeniNufus = 0;
-		for(Mahalle mahalle : mahalleler) {
+		for (Mahalle mahalle : mahalleler) {
 			yeniNufus += mahalle.nufusArttir(artisOrani);
 		}
 		nufus = yeniNufus;
 		return nufus;
 	}
-	
+
 	public void ekranaYazdir() {
 		System.out.println(this.toString());
-		for(Mahalle mahalle : mahalleler) {
+		for (Mahalle mahalle : mahalleler) {
 			mahalle.ekranaYazdir();
 		}
-		
+
 	}
 
 	public int nufusGuncelle() {
 		int toplamNufus = 0;
-		
-		//her bir ilçe kendi nüfusunu hesaplar ve döndürür
-		for(Mahalle mahalle : mahalleler) {
+
+		// her bir ilçe kendi nüfusunu hesaplar ve döndürür
+		for (Mahalle mahalle : mahalleler) {
 			toplamNufus += mahalle.nufusGuncelle();
 		}
-		
-		nufus = toplamNufus; //yeni nüfus
+
+		nufus = toplamNufus; // yeni nüfus
 		return nufus;
 	}
-	
+
 }
