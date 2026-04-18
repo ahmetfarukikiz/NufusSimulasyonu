@@ -116,21 +116,27 @@ public class Oyun {
 
 		int satir, sutun, index;
 
-		// uygunsuz index girilirse döngü devam eder
+		// uygunsuz index veya harf girilirse döngü devam eder
 		while (true) {
-			System.out.println("Satır Girin (0'dan başlar):");
-			satir = input.nextInt();
-			System.out.println("Sütun Girin (0'dan başlar):");
-			sutun = input.nextInt();
-
-			index = satir * 5 + sutun; // her satırda 5 eleman var
-
-			if (index < 0 || index >= sehirler.size()) {
-				System.out.println("Hatalı index tekrar deneyin.");
-				continue;
+			try {
+				System.out.println("Satır Girin (0'dan başlar):");
+				 //int'e dönüştüremezse NumberFormatException döndürür ve catch bunu yakalar
+				satir = Integer.parseInt(input.nextLine().trim());
+				
+				System.out.println("Sütun Girin (0'dan başlar):");
+				sutun = Integer.parseInt(input.nextLine().trim());	
+				
+				index = satir * 5 + sutun; // her satırda 5 eleman var
+	
+				if (index < 0 || index >= sehirler.size()) {
+					System.out.println("Hatalı index tekrar deneyin.");
+					continue;
+				}
+	
+				break;
+			} catch(NumberFormatException e){
+				System.out.println("Hata, sadece tam sayı giriniz");
 			}
-
-			break;
 		}
 
 		yazdirici.detayYazdir(sehirler, index);

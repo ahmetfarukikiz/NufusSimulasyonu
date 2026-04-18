@@ -9,7 +9,7 @@
 
 package araclar;
 
-public final class IDGenerator {
+public final class IDUretici {
 	private static int NextId = 100;
 
 	public static int getNextId() {

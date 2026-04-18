@@ -10,7 +10,7 @@
 package modeller;
 
 import araclar.FakeDataUretici;
-import araclar.IDGenerator;
+import araclar.IDUretici;
 
 public class Kisi {
 
@@ -52,7 +52,7 @@ public class Kisi {
 	public Kisi() {
 		ad = FakeDataUretici.getKisiAd();
 		soyad = FakeDataUretici.getKisiSoyad();
-		id = IDGenerator.getNextId(); // rastgele id üretir ()
+		id = IDUretici.getNextId(); // rastgele id üretir ()
 		yas = FakeDataUretici.getKisiYas();
 	}
 
