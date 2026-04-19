@@ -12,7 +12,7 @@ package araclar;
 import com.github.javafaker.Faker;
 import java.util.Locale;
 
-public final class FakeDataUretici {
+public final class SahteVeriUretici {
 	private static final Faker faker = new Faker(Locale.of("us"));
 
 	public static String getKisiAd() {

@@ -12,7 +12,7 @@ package modeller;
 import java.util.ArrayList;
 import java.util.List;
 
-import araclar.FakeDataUretici;
+import araclar.SahteVeriUretici;
 
 public class Mahalle extends Yerleske {
 
@@ -29,7 +29,7 @@ public class Mahalle extends Yerleske {
 	private List<Kisi> kisiler;
 
 	public Mahalle(int nufus) {
-		super(FakeDataUretici.getMahalleAd(), nufus);
+		super(SahteVeriUretici.getMahalleAd(), nufus);
 		this.kisiler = new ArrayList<Kisi>();
 	}
 

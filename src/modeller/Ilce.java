@@ -11,7 +11,7 @@ package modeller;
 
 import java.util.List;
 
-import araclar.FakeDataUretici;
+import araclar.SahteVeriUretici;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class Ilce extends Yerleske {
 	private List<Mahalle> mahalleler;
 
 	public Ilce(int nufus) {
-		super(FakeDataUretici.getIlceAd(), nufus);
+		super(SahteVeriUretici.getIlceAd(), nufus);
 		mahalleler = new ArrayList<Mahalle>();
 	}
 

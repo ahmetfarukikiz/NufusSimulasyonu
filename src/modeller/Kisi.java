@@ -9,7 +9,7 @@
 
 package modeller;
 
-import araclar.FakeDataUretici;
+import araclar.SahteVeriUretici;
 import araclar.IDUretici;
 
 public class Kisi {
@@ -24,14 +24,14 @@ public class Kisi {
 	// ad ve soyad değerleri sadece ilk kez kullanılacağı zaman atanıyor (performans için)
 	public String getAd() {
 		if (this.ad == null) {
-	        this.ad = FakeDataUretici.getKisiAd();
+	        this.ad = SahteVeriUretici.getKisiAd();
 	    }
 		return this.ad;
 	}
 
 	public String getSoyad() {
 		if (this.soyad == null) {
-	        this.soyad = FakeDataUretici.getKisiSoyad();
+	        this.soyad = SahteVeriUretici.getKisiSoyad();
 	    }
 		return this.soyad;
 	}
@@ -51,7 +51,7 @@ public class Kisi {
 
 	public Kisi() {
 		id = IDUretici.getNextId(); // rastgele id üretir ()
-		yas = FakeDataUretici.getKisiYas();
+		yas = SahteVeriUretici.getKisiYas();
 	}
 
 	public void yaslandir() {

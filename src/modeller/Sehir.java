@@ -11,7 +11,7 @@ package modeller;
 
 import java.util.List;
 
-import araclar.FakeDataUretici;
+import araclar.SahteVeriUretici;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class Sehir extends Yerleske {
 	}
 
 	public Sehir(int nufus) {
-		super(FakeDataUretici.getSehirAd(), nufus); // Sehir adi nufusu atamasi
+		super(SahteVeriUretici.getSehirAd(), nufus); // Sehir adi nufusu atamasi
 		ilceler = new ArrayList<Ilce>();
 	}
 
@@ -104,8 +104,9 @@ public class Sehir extends Yerleske {
 		return sb.append("Şehir: ").append(ad).append("-").append("Nüfus: ").append(nufus).toString();
 	}
 
+	// 4 basamaklı veya büyükse
 	public boolean dortBasamakli() {
-		return (nufus >= 1000 && nufus < 10000);
+		return (nufus >= 1000);
 	}
 
 	// Yeni bir şehir oluşturup eski şehiri verilen kurala göre bölüştürür
