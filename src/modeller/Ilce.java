@@ -3,7 +3,7 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 11.04.2026
 * <p>
-* Ilceye ait verileri tutar ve bu verilere ait iç hesaplamaları yapar.
+* Ilceye ait verileri tutar ve bu verilere ait iç (bölünme vb) hesaplamaları yapar.
 * </p>
 */
 
@@ -86,7 +86,28 @@ public class Ilce extends Yerleske {
 			return null;
 		}
 		// son elemanı listeden sil ve return et
-		return mahalleler.remove(mahalleler.size() - 1); 
+		return mahalleler.remove(mahalleler.size() - 1);
+	}
+
+	//tek ilçe olma durumunda yeni şehirde yeni bir ilçe oluşturup bölüştürme işini yapar
+	public Ilce bolun() {
+		Ilce yeniIlce = new Ilce(0);
+		int mahalleSayisi = this.mahalleler.size();
+
+		// 1 ilçe 1 mahalle:
+		if (mahalleSayisi == 1) {
+			//tek mahalle varsa ilk mahalledir
+			Mahalle yeniMahalle = mahalleler.get(0).bolun();
+			yeniIlce.mahalleEkle(yeniMahalle);
+		}
+		// 1 ilçe 2 veya 2+ mahalle
+		else {
+			int aktMahSay = mahalleSayisi / 2;
+			for (int i = 0; i < aktMahSay; i++) {
+				yeniIlce.mahalleEkle(this.popMahalle());
+			}
+		}
+		return yeniIlce;
 	}
 
 }

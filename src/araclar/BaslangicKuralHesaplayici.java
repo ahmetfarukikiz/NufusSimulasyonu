@@ -25,7 +25,7 @@ public final class BaslangicKuralHesaplayici {
 		return gercekSayi;
 	}
 
-	// toplam nüfusu sayıyı mahalle sayısına dağılabilir (bölünebilir hale getirir)
+	// toplam nüfus sayıyı mahalle sayısına dağılabilir (bölünebilir hale getirir)
 	// örn: 18->24 24 % 4 == 0
 	public static int gercekNufusHesapla(int nufus, int mahalleSayisi) {
 		int gercekNufus = nufus;

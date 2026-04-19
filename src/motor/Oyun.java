@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import modeller.Ilce;
-import modeller.Mahalle;
 import modeller.Sehir;
 import servisler.OyunBaslaticiServis;
 
@@ -54,7 +52,7 @@ public class Oyun {
 
 				// şehrin tur işlemlerinden sonra dört basamaklıysa böl
 				if (sehir.dortBasamakli()) {
-					Sehir yeniSehir = sehriBol(sehir);
+					Sehir yeniSehir = sehir.bolun();
 					yeniSehirler.add(yeniSehir);
 				}
 			}
@@ -71,63 +69,6 @@ public class Oyun {
 		yazdirici.TurYazdir(sehirler);
 
 		oyunSonuSatirSutunSor();
-
-	}
-
-	public Sehir sehriBol(Sehir sehir) {
-		// başta 0 nüfuslu boş bir şehir oluştur
-		Sehir eskiSehir = sehir;
-		Sehir yeniSehir = new Sehir(0);
-		int ilceSayisi = eskiSehir.getIlceler().size();
-
-		// ilce 1 ise:
-		if (ilceSayisi == 1) {
-
-			Ilce eskiIlce = eskiSehir.getIlceler().get(0); //başta 0 nüfuslu boş bir ilçe oluştur
-			Ilce yeniIlce = new Ilce(0);
-			int mahalleSayisi = eskiIlce.getMahalleler().size(); // 1 ilçe var o da ilk ilçe
-			
-			// ilçe ve mahalle sayısı 1 ise
-			if (mahalleSayisi == 1) {
-				System.out.println("i 1 m 1");
-				Mahalle eskiMahalle = eskiIlce.getMahalleler().get(0);
-				Mahalle yeniMahalle = new Mahalle(0);
-				int kisiSayisi = eskiMahalle.getNufus();
-				
-				int aktKisiSay = kisiSayisi / 2;
-				for(int i = 0; i < aktKisiSay; i++) {
-					yeniMahalle.kisiEkle(eskiMahalle.popKisi());
-				}
-				yeniIlce.mahalleEkle(yeniMahalle);
-				
-			}
-			
-			// ilçe 1, mahalle 2 veya 2+ ise:
-			else {
-				System.out.println("i 1 m 2+");
-				int aktMahSay = mahalleSayisi / 2;
-				for(int i = 0; i < aktMahSay; i++) {
-					yeniIlce.mahalleEkle(eskiIlce.popMahalle());
-				}
-			}
-			yeniSehir.ilceEkle(yeniIlce); 
-		}
-
-		// ilçe 2 veya 2+ ise
-		else {
-			// tam sayı bölmesiyle tek sayıysa 1 eksik aktarılacak
-			int aktIlceSay = ilceSayisi / 2;
-
-			for (int i = 0; i < aktIlceSay; i++) {
-				yeniSehir.ilceEkle(eskiSehir.popIlce());
-
-			}
-		}
-
-		// aktarılan kişi sayısına göre alttan üste nüfus güncellemesi yapar
-		yeniSehir.nufusGuncelle();
-		eskiSehir.nufusGuncelle();
-		return yeniSehir;
 
 	}
 

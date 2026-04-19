@@ -21,41 +21,48 @@ public class TestYazdirServis implements IYazdirici {
 
 	@Override
 	public void TurYazdir(List<Sehir> sehirler) {
-		if (sehirler == null || sehirler.isEmpty())
-			return;
+        System.out.printf("%-15s | %-8s | %-6s | %-6s\n", "Şehir Adı", "Nüfus", "İlçe", "Mahalle");
+        System.out.println("--------------------------------------------------");
 
-		System.out.println("--- Yaş Artış TESTI ---");
+        for (Sehir sehir : sehirler) {
+            int toplamMahalle = 0;
+            for (Ilce ilce : sehir.getIlceler()) {
+                toplamMahalle += ilce.getMahalleler().size();
+            }
 
-		Sehir ilkSehir = sehirler.get(0);
-
-		List<Ilce> ilceler = ilkSehir.getIlceler();
-		if (ilceler != null && !ilceler.isEmpty()) {
-
-			List<Mahalle> mahalleler = ilceler.get(0).getMahalleler();
-			if (mahalleler != null && !mahalleler.isEmpty()) {
-
-				List<Kisi> kisiler = mahalleler.get(0).getKisiler();
-
-				int gosterilecekSayi = Math.min(10, kisiler.size());
-				for (int i = 0; i < gosterilecekSayi; i++) {
-					Kisi k = kisiler.get(i);
-					System.out.println((i + 1) + ". Kişi (ID: " + k.getId() + ") Güncel Yaşı: " + k.getYas());
-				}
-			}
-		}
-		System.out.println("-----------------------");
+            // Şehir özeti: Nüfus, ilçe sayısı ve toplam mahalle sayısı
+            System.out.printf("%-15s | %-8d | %-6d | %-6d\n", 
+                sehir.getAd(), 
+                sehir.getNufus(), 
+                sehir.getIlceler().size(), 
+                toplamMahalle);
+        }
+        System.out.println("=====================================\n");
 	}
 
 	@Override
 	public void detayYazdir(List<Sehir> sehirler, int index) {
-		// TODO Auto-generated method stub
-
+		Sehir sehir = sehirler.get(index);
+        System.out.println(">>> SEÇİLEN ŞEHİR DERİN ANALİZİ <<<");
+        System.out.println("Şehir: " + sehir.getAd() + " (Toplam Nüfus: " + sehir.getNufus() + ")");
+        
+        for (Ilce ilce : sehir.getIlceler()) {
+            System.out.println("  └── [İlçe] " + ilce.getAd() + " (Nüfus: " + ilce.getNufus() + ")");
+            for (Mahalle mahalle : ilce.getMahalleler()) {
+                System.out.println("      └── [Mahalle] " + mahalle.getAd() + 
+                                   " (Nüfus/Kişi: " + mahalle.getKisiler().size() + ")");
+                
+                // Eğer nüfus çok azsa (test aşamasında) kişileri de görmek istersen:
+                if (mahalle.getKisiler().size() <= 10) {
+                    mahalle.ekranaYazdir();
+                }
+            }
+        }
 	}
 
 	@Override
 	public void ekraniTemizle() {
-		// TODO Auto-generated method stub
-
+		// turların gözükebilmesi için ekran temizlenmiyor.
 	}
 
 }

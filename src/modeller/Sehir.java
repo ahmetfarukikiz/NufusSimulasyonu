@@ -3,7 +3,7 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 11.04.2026
 * <p>
-* Sehre ait verileri tutar ve bu verilere ait iç hesaplamaları yapar.
+* Sehre ait verileri tutar ve bu verilere ait iç hesaplamaları (bölünme vb) yapar.
 * </p>
 */
 
@@ -23,16 +23,6 @@ public class Sehir extends Yerleske {
 		onlar = (short) ((nufus % 100) / 10);
 		birler = (short) (nufus % 10);
 		return onlar + birler;
-	}
-
-	public int getMahalleNufusu() {
-		return ilceler.get(0).getMahalleler().get(0).getKisiler().size();
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder(35);
-		return sb.append("Şehir: ").append(ad).append("-").append("Nüfus: ").append(nufus).toString();
 	}
 
 	private List<Ilce> ilceler;
@@ -64,7 +54,7 @@ public class Sehir extends Yerleske {
 			return null;
 		}
 		// son elemanı listeden sil ve return et
-		return ilceler.remove(ilceler.size() - 1); 
+		return ilceler.remove(ilceler.size() - 1);
 	}
 
 	public void yaslandir() {
@@ -73,6 +63,8 @@ public class Sehir extends Yerleske {
 		}
 	}
 
+	// artış oranına göre hesaplaması için bir alt sınıfın metodunu çağırır dönen
+	// değerleri toplar
 	public void nufusArttir() {
 		int toplamNufus = 0;
 		int artisOrani = getNufusArtisOrani();
@@ -85,6 +77,7 @@ public class Sehir extends Yerleske {
 		nufus = toplamNufus; // yeni nüfus
 	}
 
+	// ilçelerinin nüfuslarını toplar ve yeni nüfusu hesaplar
 	public void nufusGuncelle() {
 		int toplamNufus = 0;
 
@@ -96,6 +89,8 @@ public class Sehir extends Yerleske {
 		nufus = toplamNufus; // yeni nüfus
 	}
 
+	// her sınıf kendi toString() metodunu ekrana bastırır sonra bir altındakini
+	// çağırır.
 	public void ekranaYazdir() {
 		System.out.println(this.toString());
 		for (Ilce ilce : ilceler) {
@@ -103,8 +98,40 @@ public class Sehir extends Yerleske {
 		}
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(35);
+		return sb.append("Şehir: ").append(ad).append("-").append("Nüfus: ").append(nufus).toString();
+	}
+
 	public boolean dortBasamakli() {
 		return (nufus >= 1000 && nufus < 10000);
+	}
+
+	// Yeni bir şehir oluşturup eski şehiri verilen kurala göre bölüştürür
+	public Sehir bolun() {
+		Sehir yeniSehir = new Sehir(0);
+		int ilceSayisi = ilceler.size();
+
+		// 1 ilçe
+		if (ilceSayisi == 1) {
+			Ilce yeniIlce = ilceler.get(0).bolun();
+			yeniSehir.ilceEkle(yeniIlce);
+		}
+
+		// 2 veya 2+ ilçe
+		else {
+			int aktIlceSay = ilceSayisi / 2;
+
+			for (int i = 0; i < aktIlceSay; i++) {
+				yeniSehir.ilceEkle(this.popIlce());
+			}
+		}
+
+		yeniSehir.nufusGuncelle();
+		nufusGuncelle();
+
+		return yeniSehir;
 	}
 
 }

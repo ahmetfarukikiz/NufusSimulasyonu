@@ -37,8 +37,7 @@ public class Main {
 			int[] sayiDizi = BaslangicStringCevirici.stringiSayiyaCevir(sayilarString);
 
 			Oyun oyun = new Oyun(turSayisi, sayiDizi, new YazdirServis()); // gerçek uygulama esnasında
-			// Oyun oyun = new Oyun(turSayisi, sayilarString, new TestYazdirServis());
-			// //test amaçlı çıktı
+			//Oyun oyun = new Oyun(turSayisi, sayiDizi, new TestYazdirServis()); //test amaçlı çıktı
 			oyun.baslat();
 
 		} catch (Exception e) {

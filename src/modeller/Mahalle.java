@@ -3,7 +3,7 @@
 * @author Ahmet Faruk İkiz faruk.ikiz@ogr.sakarya.edu.tr
 * @since 11.04.2026
 * <p>
-* Mahalleye ait verileri tutar ve bu verilere ait iç hesaplamaları yapar.
+* Mahalleye ait verileri tutar ve bu verilere ait iç (bölünme, yaşlanma vb) hesaplamaları yapar.
 * </p>
 */
 
@@ -93,7 +93,22 @@ public class Mahalle extends Yerleske {
 			return null;
 		}
 		// son elemanı listeden sil ve return et
-		return kisiler.remove(kisiler.size() - 1); 
+		return kisiler.remove(kisiler.size() - 1);
+	}
+
+	// tek mahalle olma durumunda yeni ilçede yeni bir mahalle oluşturup bölüştürme işini yapar
+	public Mahalle bolun() {
+		Mahalle yeniMahalle = new Mahalle(0);
+		int kisiSayisi = nufus;
+
+		// tam sayı bölmesi nüfus tekse fazlalık eskide kalıcak
+		int aktKisiSay = kisiSayisi / 2;
+		for (int i = 0; i < aktKisiSay; i++) {
+			//eski mahalleden kişiler aktarılıyor
+			yeniMahalle.kisiEkle(this.popKisi());
+		}
+
+		return yeniMahalle;
 	}
 
 }
