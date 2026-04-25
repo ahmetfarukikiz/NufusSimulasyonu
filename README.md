@@ -1,3 +1,12 @@
+# Çalışabilir jar dosyasını indirmek ve çalıştırmak için:
+
+
+1. Jar dosyasını indirin 📥 [indir](https://github.com/ahmetfarukikiz/NufusSimulasyonu/releases/download/v1.0.0/NufusYonetim.jar)
+2. Cmd'yi NufusYonetim.jar'ın olduğu dosya yolunda açın.
+3. Konsola: ```java -jar NufusYonetim.jar``` yazın.
+4. Tur sayısına 6 dan küçük bir sayı girin (örn: 4)
+5. İstenen sayıları "xx xx xx" formatında girin (örn: 21 18 92 41 85 18 49 27)
+
 # Ödevde İstenenler:
 
 * Ödevde bir string dizisi şeklinde alınan 2 basamaklı sayıların kendisi, birler ve onlar basamağı gibi özelliklerinden her biri şehirdeki nüfus (kendisi),
